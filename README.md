@@ -10,6 +10,8 @@ MaterialUI being used for styling: https://mui.com/material-ui/getting-started/
 
 To run the database, `cd backend/DynamoDB_local_latest` then `java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb`
 
+If you want to run the frontend and express server at the same time, run `npm run dev:all` in the root directory.
+
 To run express server's api's, `cd backend/express-api` then `npm install` and then `npm start`
 - Whenever you update anything related to API's, must run `tsc` to compile the typescript code into javascript code then run `npm start` to start the server
 
