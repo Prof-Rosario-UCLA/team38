@@ -1,34 +1,58 @@
 .navbar {
-  background-color: #515151;
+  background-color: #333;
   padding: 1rem;
-  margin-bottom: 2rem;
 }
 
 .navbar-list {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
+  list-style-type: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-title {
+  color: white;
+  font-size: 1.5rem;
+  margin-right: auto; /* Pushes other items to the right */
 }
 
 .navbar-link {
   color: white;
   text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 500;
-} 
+  padding: 0.5rem 1rem;
+  display: block;
+}
 
 .navbar-link:hover {
-  color: #afafaf;
+  background-color: #555;
 }
 
-.navbar-title {
+/* Styles for the user menu dropdown */
+.user-menu-container {
+  position: relative; /* Establishes a positioning context for the logout button */
+  color: white; /* Assuming the username text should be white like other links */
+  padding: 0.5rem 1rem; /* Similar padding to other navbar items */
+}
+
+.user-menu-container span {
+    cursor: default; /* To indicate it's not directly clickable like a link */
+}
+
+.user-menu-container .logout-button {
+  position: absolute;
+  top: 100%; /* Positions the button right below the username */
+  left: 0; /* Aligns the button to the left of the container */
+  background-color: #444; /* Slightly different background for the button */
   color: white;
-  font-size: 1.1rem;
-  font-weight: 1000;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: none; /* Initially hidden */
+  white-space: nowrap; /* Prevents the button text from wrapping */
+  z-index: 10; /* Ensures the button appears above other elements */
 }
 
-.navbar-list li:last-child {
-  margin-left: auto;
+.user-menu-container:hover .logout-button {
+  display: block; /* Shows the button on hover */
 }
