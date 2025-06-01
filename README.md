@@ -21,10 +21,10 @@ http://localhost:3000/favorite-teams/user123
 `curl -X POST -H "Content-Type: application/json" -d '{"favorites": ["MIN"]}' http://localhost:3000/favorite-Teams/user123/NBAFavorites`
 `aws dynamodb put-item \ --table-name FavoriteTeams \ --item '{ "UserID": {"S": "user123"}, "NFLFavorites": {"SS": ["ARI", "NE"]}, "NBAFavorites": {"SS": ["LAL", "BOS"]}, "MLBFavorites": {"SS": ["NYM", "LAD"]} }' \ --endpoint-url http://localhost:8000 \ --region us-west-1`
 `curl -X DELETE http://localhost:3000/favorite-teams/user123`
-`curl -X POST http://localhost:3000/favorite-teams \          
+`curl -X POST http://localhost:3000/favorite-teams \
   -H "Content-Type: application/json" \
   -d '{
-    "UserID": "user123",  
+    "UserID": "dhruvpareek883@gmail.com",
     "NFLFavorites": ["ARI", "NE"],
     "NBAFavorites": ["LAL", "BOS"],
     "MLBFavorites": ["NYM", "LAD"]

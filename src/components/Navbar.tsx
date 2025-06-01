@@ -6,6 +6,7 @@ const Navbar = () => {
   const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
   const loginButton = <button onClick={() => loginWithRedirect()}>Log In</button>;
   const logoutButton = <button className="logout-button" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</button>;
+  console.log(user?.email);
 
   return (
     <nav className="navbar">
