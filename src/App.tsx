@@ -2,10 +2,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Dashboard from './components/Dashboard'
 import SelectTeams from './components/SelectTeams'
-import SignIn from './components/SignIn'
 import './App.css'
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 function App() {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+
   return (
     <Router>
       <div>
@@ -14,7 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/select-teams" element={<SelectTeams />} />
-            <Route path="/sign-in" element={<SignIn />} />
+            
           </Routes>
         </main>
       </div>
