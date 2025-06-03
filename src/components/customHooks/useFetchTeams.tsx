@@ -30,6 +30,8 @@ export default function useFetchTeams(league: string) {
                 const raw = response.data.sports[0].leagues[0].teams;
                 const justTeams = raw.map((wrapper: { team: any }) => wrapper.team);
                 setTeams(justTeams);
+                console.log('Fetched teams:', justTeams);
+                console.log('Raw data:', raw);
                 setError(null);
             } catch (err: any) {
                 setError(err.message || 'An error occurred while fetching teams');

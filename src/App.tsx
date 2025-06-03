@@ -5,26 +5,25 @@ import SelectTeams from './components/SelectTeams'
 import './App.css'
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 function App() {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { isLoading } = useAuth0();
   if (isLoading) {
     return <div>Loading ...</div>;
   }
 
   return (
-    <Router>
-      <div>
-        <Navbar />
-        <main className='main'>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/select-teams" element={<SelectTeams />} />
-            
-          </Routes>
-        </main>
-      </div>
-    </Router>
+      <Router>
+        <div >
+          <Navbar />
+          <main className='main'>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/select-teams" element={<SelectTeams />} />
+              
+            </Routes>
+          </main>
+        </div>
+      </Router>
   )
 }
 
