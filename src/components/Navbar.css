@@ -27,32 +27,3 @@
 .navbar-link:hover {
   background-color: #555;
 }
-
-/* Styles for the user menu dropdown */
-.user-menu-container {
-  position: relative; /* Establishes a positioning context for the logout button */
-  color: white; /* Assuming the username text should be white like other links */
-  padding: 0.5rem 1rem; /* Similar padding to other navbar items */
-}
-
-.user-menu-container span {
-    cursor: default; /* To indicate it's not directly clickable like a link */
-}
-
-.user-menu-container .logout-button {
-  position: absolute;
-  top: 100%; /* Positions the button right below the username */
-  left: 0; /* Aligns the button to the left of the container */
-  background-color: #444; /* Slightly different background for the button */
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  display: none; /* Initially hidden */
-  white-space: nowrap; /* Prevents the button text from wrapping */
-  z-index: 10; /* Ensures the button appears above other elements */
-}
-
-.user-menu-container:hover .logout-button {
-  display: block; /* Shows the button on hover */
-}

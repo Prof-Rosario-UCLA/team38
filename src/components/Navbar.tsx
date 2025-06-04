@@ -12,7 +12,10 @@ const Navbar = () => {
     <nav className="navbar">
       <ul className="navbar-list">
         <li className="navbar-title">
-            My Team Tracker
+            {isAuthenticated ? (
+            `${user?.name}'s Team Tracker` ) : (
+            "Team Tracker"
+            )}
         </li>
         <li>
           <Link to="/" className="navbar-link">
@@ -24,12 +27,9 @@ const Navbar = () => {
             Select Teams
           </Link>
         </li>
-        <li className="user-menu-container">
+        <li>
             {isAuthenticated ? (
-              <>
-                <span>{user?.name}</span>
-                {logoutButton}
-              </>
+                logoutButton
             ) : (
               loginButton
             )}
