@@ -34,13 +34,56 @@ interface FaviteTeamsPayload {
   MLBFavorites?: string[];
 }
 
+const useNavbarHeight = () => {
+  const [navbarHeight, setNavbarHeight] = useState(70);
+
+  useEffect(() => {
+    const updateNavbarHeight = () => {
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        setNavbarHeight(navbar.getBoundingClientRect().height);
+      }
+    };
+
+    // Initial measurement
+    updateNavbarHeight();
+
+    // Update on window resize
+    window.addEventListener('resize', updateNavbarHeight);
+    
+    // Also update after a short delay to account for dynamic content loading
+    const timeoutId = setTimeout(updateNavbarHeight, 100);
+
+    return () => {
+      window.removeEventListener('resize', updateNavbarHeight);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  return navbarHeight;
+};
+
 const SelectTeams = () => {
-  const { user } = useAuth0();
+  const { user, isLoading } = useAuth0();
   const userEmail: string = user?.email || '';
+  const navbarHeight = useNavbarHeight();
+
+  if (isLoading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   if (!user) {
-    return <p>Please login to view/select your favorite teams.</p>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
+        <p>Please login to select your favorite teams.</p>
+      </Box>
+    );
   }
+
   const [league, setLeague] = useState<League>('NBA');
   const { teams, loading, error } = useFetchTeams(league);
     const [selectedTeams, setSelectedTeams] = useState<Record<League, string[]>>({
@@ -58,12 +101,12 @@ const SelectTeams = () => {
     return 5;
   };
   const getGridRows = () => {
-    if (height < 600) return 1;
-    if (height < 700) return 2;
-    if (height < 800) return 3;
-    if (height < 900) return 4;
-    if (height < 1000) return 5;
-    if (height < 1100) return 6;
+    if (height < 550) return 1;
+    if (height < 650) return 2;
+    if (height < 750) return 3;
+    if (height < 850) return 4;
+    if (height < 950) return 5;
+    if (height < 1050) return 6;
     return 7;
   }
   const gridColumns = getGridColumns();
@@ -150,8 +193,8 @@ const SelectTeams = () => {
   const pagedTeams = teams.slice(start, start + itemsPerPage);
 
   return (
-    <>
-    <header className="header-content">
+    <div className="select-teams-container">
+    <header className="header-content" style={{ paddingTop: `${navbarHeight + 10}px` }}>
       <p>Choose your favorite teams to follow.</p>
       <Box sx={{ minWidth: 120, maxWidth: 220, mb: 2 }}>
         <FormControl fullWidth>
@@ -273,7 +316,7 @@ const SelectTeams = () => {
         </Alert>
       </Snackbar>
     </main>
-    </>
+    </div>
   );
 };
 

@@ -4,6 +4,7 @@ import useScoreboardData from "./customHooks/useScoreboardData";
 import useFetchTeamDetails from "./customHooks/useFetchTeamDetails";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
+import "./DashboardSection.css";
 
 import React, { useState, useEffect, type JSX } from "react";
 import SportsFootballIcon from "@mui/icons-material/SportsFootball";
@@ -15,6 +16,7 @@ import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const theme = createTheme({
   breakpoints: {
@@ -22,10 +24,51 @@ const theme = createTheme({
   }
 });
 
+// Add the same navbar height hook
+const useNavbarHeight = () => {
+  const [navbarHeight, setNavbarHeight] = useState(70);
+  const [appBarHeight, setAppBarHeight] = useState(60);
+
+  useEffect(() => {
+    const updateHeights = () => {
+      const navbar = document.querySelector('.navbar');
+      const appBar = document.querySelector('.MuiAppBar-root');
+      
+      if (navbar) {
+        setNavbarHeight(navbar.getBoundingClientRect().height);
+      }
+      if (appBar) {
+        setAppBarHeight(appBar.getBoundingClientRect().height);
+      }
+    };
+
+    // Initial measurement
+    updateHeights();
+
+    // Update on window resize
+    window.addEventListener('resize', updateHeights);
+    
+    // Also update after a short delay to account for dynamic content loading
+    const timeoutId = setTimeout(updateHeights, 100);
+    
+    // Additional timeout for AppBar rendering
+    const appBarTimeoutId = setTimeout(updateHeights, 500);
+
+    return () => {
+      window.removeEventListener('resize', updateHeights);
+      clearTimeout(timeoutId);
+      clearTimeout(appBarTimeoutId);
+    };
+  }, []);
+
+  return { navbarHeight, appBarHeight };
+};
+
 const Dashboard = () => {
-  const { user } = useAuth0();
-  const { teamsBySport, loading, error } = useFetchFavTeams(user?.email);
+  const { user, isLoading: isLoadingAuth0 } = useAuth0();
+  const { teamsBySport, loading: loadingFavTeams, error: errorFavTeams } = useFetchFavTeams(user?.email);
   const [selectedTab, setSelectedTab] = useState(0);
+  const { navbarHeight, appBarHeight } = useNavbarHeight();
 
   const { NBAFavorites = [], NFLFavorites = [], MLBFavorites = [] } = teamsBySport;
 
@@ -80,16 +123,27 @@ const Dashboard = () => {
     e.preventDefault(); 
   };
 
+  if (isLoadingAuth0) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
+        <CircularProgress />
+      </Box>
+    );
+  }
   if (!user) {
-    return <p>Please login to view/select your favorite teams</p>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
+        <p>Please login to view your favorite teams</p>
+      </Box>
+    );
   }
 
-  if (loading) {
+  if (loadingFavTeams) {
     return <p>Loading...</p>;
   }
 
-  if (error) {
-    return <p>Error: {error}</p>;
+  if (errorFavTeams) {
+    return <p>Error: {errorFavTeams}</p>;
   }
 
   const formatFutureGame = (isoString: string | undefined): string => {
@@ -169,16 +223,7 @@ const Dashboard = () => {
     if (!teams.length) return <p>No favorite teams for {currentLeague.toUpperCase()}</p>;
 
     return (
-      <section
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: 16,
-          padding: 16,
-          width: "100%",
-          overflowY: "auto",
-        }}
-      >
+      <section className="dashboard-section">
         {teamOrder.map((id) => {
           const team = teams.find((t: any) => t.team.id === id);
           if (!team) return null;
@@ -223,7 +268,7 @@ const Dashboard = () => {
     <ThemeProvider theme={theme}>
       <Box height="100%" width="100%" display="flex" flexDirection="column" overflow="hidden">
         <AppBar position="fixed" color="primary" sx={{ 
-          top: { xs: 130, sm: 96, md: 70 },
+          top: `${navbarHeight}px`,
           left: 0,
           right: 0,
           zIndex: 1000
@@ -259,10 +304,10 @@ const Dashboard = () => {
           justifyContent="center"
           alignItems="center"
           sx={{
-            paddingLeft: 2,
-            paddingRight: 2,
+            paddingLeft: 0,
+            paddingRight: 0,
             paddingBottom: 2,
-            paddingTop: { xs: 23, sm: 22, md: 18 },
+            paddingTop: `${navbarHeight + appBarHeight + 10}px`,
             overflow: "hidden",
           }}
         >

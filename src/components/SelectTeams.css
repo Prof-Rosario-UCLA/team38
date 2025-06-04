@@ -1,15 +1,10 @@
+.select-teams-container {
+  /* Main container styles */
+}
+
 .header-content {
-    padding-top: 70px;
-  }
-  
-  @media screen and (max-width: 641px) {
-    .header-content {
-      padding-top: 100px;
-    }
-  }
-  
-  @media screen and (max-width: 432px) {
-    .header-content {
-      padding-top: 125px;
-    }
-  }
+  /* Remove fixed padding-top since we're using dynamic padding */
+}
+
+/* Remove all media queries since we're handling this dynamically */
+
