@@ -24,11 +24,12 @@ export default function useFetchFavTeams(userID: string | undefined) {
       
                 const dataObj = response.data as RawFavorites;
 
-                console.log("raw dataObj", dataObj);
                 setTeamsBySport(dataObj);
                 setError(null);
             } catch (err: any) {
-                setError(err.message || 'An error occurred while fetching teams');
+                if(err.response.status !== 404){
+                    setError(err.message || 'An error occurred while fetching teams');
+                }
                 setTeamsBySport({});
             } finally {
                 setLoading(false);

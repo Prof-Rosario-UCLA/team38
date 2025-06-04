@@ -24,7 +24,7 @@ const theme = createTheme({
   }
 });
 
-// Add the same navbar height hook
+//Get the height of the navbar and app bar
 const useNavbarHeight = () => {
   const [navbarHeight, setNavbarHeight] = useState(70);
   const [appBarHeight, setAppBarHeight] = useState(60);
@@ -42,7 +42,6 @@ const useNavbarHeight = () => {
       }
     };
 
-    // Initial measurement
     updateHeights();
 
     // Update on window resize
@@ -61,6 +60,7 @@ const useNavbarHeight = () => {
     };
   }, []);
 
+  //return the height of the navbar and app bar
   return { navbarHeight, appBarHeight };
 };
 
@@ -219,8 +219,9 @@ const Dashboard = () => {
 
   const renderTabContent = () => {
     if (teamsLoading) return <p>Loading {currentLeague.toUpperCase()} teams...</p>;
+    console.log(teamsError);
     if (teamsError) return <p>Error: {teamsError}</p>;
-    if (!teams.length) return <p>No favorite teams for {currentLeague.toUpperCase()}</p>;
+    if (!teams.length) return <p>No favorite teams for {currentLeague.toUpperCase()}, select some on the "Select Teams" page</p>;
 
     return (
       <section className="dashboard-section">

@@ -17,7 +17,6 @@ import Grid from '@mui/material/Grid';
 import useFetchFavTeams from './customHooks/useFetchFavTeams';
 import Alert from '@mui/material/Alert';
 import useWindowDimensions  from './customHooks/useWindowDimensions';
-import './SelectTeams.css';
 
 interface Team {
   id: string;
