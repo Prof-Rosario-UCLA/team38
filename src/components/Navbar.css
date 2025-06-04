@@ -1,6 +1,11 @@
 .navbar {
   background-color: #333;
   padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .navbar-list {
@@ -15,6 +20,13 @@
   color: white;
   font-size: 1.5rem;
   margin-right: auto; /* Pushes other items to the right */
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-title {
+    font-size: 1.2rem;
+  }
 }
 
 .navbar-link {

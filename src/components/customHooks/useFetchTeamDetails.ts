@@ -41,7 +41,7 @@ export default function useFetchTeamDetails(
     };
 
     fetchData();
-  }, [sport, league, abbreviations]);
+  }, [sport, league, JSON.stringify(abbreviations.slice().sort())]);
 
   return { data, loading, error };
 }

@@ -17,6 +17,7 @@ import Grid from '@mui/material/Grid';
 import useFetchFavTeams from './customHooks/useFetchFavTeams';
 import Alert from '@mui/material/Alert';
 import useWindowDimensions  from './customHooks/useWindowDimensions';
+import './SelectTeams.css';
 
 interface Team {
   id: string;
@@ -38,7 +39,7 @@ const SelectTeams = () => {
   const userEmail: string = user?.email || '';
 
   if (!user) {
-    return <p>Please log in to select your favorite teams.</p>;
+    return <p>Please login to view/select your favorite teams.</p>;
   }
   const [league, setLeague] = useState<League>('NBA');
   const { teams, loading, error } = useFetchTeams(league);
@@ -150,8 +151,7 @@ const SelectTeams = () => {
 
   return (
     <>
-    <header>
-      <h1>Select Teams</h1>
+    <header className="header-content">
       <p>Choose your favorite teams to follow.</p>
       <Box sx={{ minWidth: 120, maxWidth: 220, mb: 2 }}>
         <FormControl fullWidth>

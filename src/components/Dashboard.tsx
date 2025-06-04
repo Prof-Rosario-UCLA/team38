@@ -2,6 +2,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import useFetchFavTeams from "./customHooks/useFetchFavTeams";
 import useScoreboardData from "./customHooks/useScoreboardData";
 import useFetchTeamDetails from "./customHooks/useFetchTeamDetails";
+import { ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 import React, { useState, useEffect, type JSX } from "react";
 import SportsFootballIcon from "@mui/icons-material/SportsFootball";
@@ -14,6 +16,11 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
+const theme = createTheme({
+  breakpoints: {
+    values: { xs: 0, sm: 432, md: 657, lg: 900, xl: 1200 }
+  }
+});
 
 const Dashboard = () => {
   const { user } = useAuth0();
@@ -45,7 +52,7 @@ const Dashboard = () => {
 
   const [teamOrder, setTeamOrder] = useState<string[]>([]);
 
-// Sync teamOrder when teams change
+  // Sync teamOrder when teams change
   useEffect(() => {
     if (teams.length && teamOrder.length === 0) {
       setTeamOrder(teams.map((t: any) => t.team.id));
@@ -74,7 +81,7 @@ const Dashboard = () => {
   };
 
   if (!user) {
-    return <p>Please login to view your favorite teams</p>;
+    return <p>Please login to view/select your favorite teams</p>;
   }
 
   if (loading) {
@@ -213,37 +220,56 @@ const Dashboard = () => {
 
 
   return (
-    <Box height="100%" width="100%" display="flex" flexDirection="column" overflow="hidden">
-    <AppBar position="static" color="primary">
-      <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth" centered>
-        {sports.map((sport) => (
-          <Tab
-            key={sport.label}
-            icon={sport.icon}
-            label={sport.label}
-            sx={{
-              color: 'text.primary',
-              '&:hover': {
-                bgcolor: 'primary.light',
-              },
-              '&.Mui-selected': {
-                bgcolor: 'primary.light',
-                color: 'text.primary',
-              },
-              transition: 'all 0.3s ease',
-              '& .MuiTab-iconWrapper': {
-                color: 'text.primary',
-              },
-            }}
-          />
-        ))}
-      </Tabs>
-    </AppBar>
+    <ThemeProvider theme={theme}>
+      <Box height="100%" width="100%" display="flex" flexDirection="column" overflow="hidden">
+        <AppBar position="fixed" color="primary" sx={{ 
+          top: { xs: 130, sm: 96, md: 70 },
+          left: 0,
+          right: 0,
+          zIndex: 1000
+        }}>
+          <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth" centered>
+            {sports.map((sport) => (
+              <Tab
+                key={sport.label}
+                icon={sport.icon}
+                label={sport.label}
+                sx={{
+                  color: 'text.primary',
+                  '&:hover': {
+                    bgcolor: 'primary.light',
+                  },
+                  '&.Mui-selected': {
+                    bgcolor: 'primary.light',
+                    color: 'text.primary',
+                  },
+                  transition: 'all 0.3s ease',
+                  '& .MuiTab-iconWrapper': {
+                    color: 'text.primary',
+                  },
+                }}
+              />
+            ))}
+          </Tabs>
+        </AppBar>
 
-    <Box flex={1} display="flex" justifyContent="center" alignItems="center" padding={2} overflow="hidden">
-      {renderTabContent()}
-    </Box>
-  </Box>
+        <Box
+          flex={1}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            paddingLeft: 2,
+            paddingRight: 2,
+            paddingBottom: 2,
+            paddingTop: { xs: 23, sm: 22, md: 18 },
+            overflow: "hidden",
+          }}
+        >
+          {renderTabContent()}
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 };
 
