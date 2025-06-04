@@ -69,8 +69,15 @@
   padding: 0.5rem 1rem;
   display: block;
   white-space: nowrap;
+  position: relative;
 }
 
 .navbar-link:hover {
   background-color: #555;
+}
+
+.navbar-link.active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
