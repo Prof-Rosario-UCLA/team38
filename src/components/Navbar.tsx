@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -18,14 +18,14 @@ const Navbar = () => {
             )}
         </li>
         <li>
-          <Link to="/" className="navbar-link">
+          <NavLink to="/" className="navbar-link" end>
             Dashboard
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/select-teams" className="navbar-link">
+          <NavLink to="/select-teams" className="navbar-link">
             Select Teams
-          </Link>
+          </NavLink>
         </li>
         <li>
             {isAuthenticated ? (
