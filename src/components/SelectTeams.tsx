@@ -162,6 +162,9 @@ const SelectTeams = () => {
         MLBFavorites: selectedTeams.MLB
       };
 
+      console.log('Saving favorite teams:', payload);
+      console.log("Stringified payload:", JSON.stringify(payload));
+
       const response = await fetch('http://localhost:3000/favorite-teams', {
         method: 'POST',
         headers: {
@@ -169,6 +172,10 @@ const SelectTeams = () => {
         },
         body: JSON.stringify(payload)
       });
+
+      console.log('Response status:', response.status);
+      const responseBody = await response.text();
+      console.log("Response body:", responseBody);
 
       if (response.ok) {
         setSaveStatus('success');

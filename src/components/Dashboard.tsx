@@ -267,7 +267,6 @@ const Dashboard = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box height="100%" width="100%" display="flex" flexDirection="column" overflow="hidden">
         <AppBar position="fixed" color="primary" sx={{ 
           top: `${navbarHeight}px`,
           left: 0,
@@ -298,18 +297,14 @@ const Dashboard = () => {
             ))}
           </Tabs>
         </AppBar>
+      <Box flex={1} display="flex" flexDirection="column" overflow="hidden">
 
         <Box
-          flex={1}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
           sx={{
-            paddingLeft: 0,
-            paddingRight: 0,
-            paddingBottom: 2,
-            paddingTop: `${navbarHeight + appBarHeight + 10}px`,
-            overflow: "hidden",
+            height: `calc(100vh - ${navbarHeight + appBarHeight}px)`,
+            marginTop: `${navbarHeight + appBarHeight }px`,
+            overflowY: "auto",
+            padding: 2,
           }}
         >
           {renderTabContent()}
