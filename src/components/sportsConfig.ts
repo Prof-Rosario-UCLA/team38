@@ -13,12 +13,3 @@ export const sportMappings = {
   leagues: ["nba", "nfl", "mlb"],
   favorites: ["NBAFavorites", "NFLFavorites", "MLBFavorites"],
 };
-
-// File: theme/dashboardTheme.ts
-import { createTheme } from "@mui/material/styles";
-
-export const dashboardTheme = createTheme({
-  breakpoints: {
-    values: { xs: 0, sm: 432, md: 657, lg: 900, xl: 1200 },
-  },
-});

@@ -136,7 +136,7 @@ const Dashboard = () => {
       >
         <Tabs value={subTabValue} onChange={handleSubTabChange} variant="fullWidth" centered>
           <Tab label="Teams" />
-          <Tab label="News" />
+          <Tab label="League News" />
         </Tabs>
       </Box>
       
