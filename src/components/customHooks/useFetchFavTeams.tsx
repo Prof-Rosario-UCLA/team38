@@ -6,7 +6,8 @@ interface RawFavorites {
     NBAFavorites?: string[];
     MLBFavorites?: string[];
   }
-  
+
+  const isLocal = false;
   
 export default function useFetchFavTeams(userID: string | undefined) {
     const [teamsBySport, setTeamsBySport] = useState<RawFavorites>({});
@@ -19,7 +20,7 @@ export default function useFetchFavTeams(userID: string | undefined) {
         const fetchTeams = async () => {
             try {
                 setLoading(true);
-                let url = `http://localhost:3000/favorite-teams/${userID}`;
+                let url = isLocal ? `http://localhost:8080/favorite-teams/${userID}` : `https://cs144-25s-dhruvpareek12.uw.r.appspot.com/favorite-teams/${userID}`;
                 const response = await axios.get(url);
       
                 const dataObj = response.data as RawFavorites;

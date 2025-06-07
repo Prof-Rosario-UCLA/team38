@@ -1,19 +1,24 @@
 # React + TypeScript + Vite
 
-To run the project, run `npm install` and then `npm run dev`, then go to `http://localhost:5173/`.
-
-`npm run dev` takes a while to start for some reason and opening the page takes a while, so we need to figure that out
-
 
 MaterialUI being used for styling: https://mui.com/material-ui/getting-started/
 `npm install @mui/material @emotion/react @emotion/styled`
 
-To run the database, `cd backend/DynamoDB_local_latest` then `java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb`
-
-If you want to run the frontend and express server at the same time, run `npm run dev:all` in the root directory.
-
-To run express server's api's, `cd backend/express-api` then `npm install` and then `npm start`
 - Whenever you update anything related to API's, must run `tsc` to compile the typescript code into javascript code then run `npm start` to start the server
+
+Deploying to App Engine:
+`gcloud app deploy --version X`  
+To look at logs:
+`gcloud app logs tail -s default`
+
+To run project Locally:
+-In useFetchFavTeams.tsx, change isLocal to true to run locally
+-In SelectTeams.tsx, change isLocal to true to run locally
+-backend/express-api/.env uncomment the local section and comment the production section
+`npm install` then to run Express API routes and Frontend: `NODE_ENV=production npm start`
+-To run the database, `cd backend/DynamoDB_local_latest` then `java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb`
+
+
 
 EXAMPLE BROWSER REQUEST:
 http://localhost:3000/favorite-teams/
