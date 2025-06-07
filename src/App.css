@@ -7,5 +7,14 @@
 }
 
 .main {
-  padding: '0 2rem';
+  padding: "0 2rem";
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* prevent the body from scrolling  */
 }
