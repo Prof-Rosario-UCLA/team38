@@ -40,3 +40,6 @@ http://localhost:3000/favorite-teams/user123
 Current API Being used to Load Teams: https://gist.github.com/bhaidar/b2fdd34004250932a4a354a2cc15ddd4
 
 -Two things we need to remember the entire time is that the webapp must be a single page type of thing with no vertical or horizontal scrolling and that the webapp must be responsive to different screen sizes like project 1.
+
+-If you drag and drop a team, it will update the database and the frontend will update.
+--But if you leave the component where you just did the drag/drop too quickly, when you come back to the component, the teams will be in the old order because the database update didn't take effect yet, this is a database/api route latency issue unfortunately.

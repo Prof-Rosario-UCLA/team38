@@ -3,7 +3,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import useFetchTeams from './customHooks/useFetchTeams';
+import useFetchTeams from '../customHooks/useFetchTeams';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -14,9 +14,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Button, Snackbar } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import useFetchFavTeams from './customHooks/useFetchFavTeams';
+import useFetchFavTeams from '../customHooks/useFetchFavTeams';
 import Alert from '@mui/material/Alert';
-import useWindowDimensions  from './customHooks/useWindowDimensions';
+import useWindowDimensions  from '../customHooks/useWindowDimensions';
 
 interface Team {
   id: string;
@@ -171,6 +171,10 @@ const SelectTeams = () => {
         },
         body: JSON.stringify(payload)
       });
+
+      console.log('Response status:', response.status);
+      const responseBody = await response.text();
+      console.log("Response body:", responseBody);
 
       if (response.ok) {
         setSaveStatus('success');

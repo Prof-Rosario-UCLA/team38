@@ -13,9 +13,9 @@ function App() {
 
   return (
       <Router>
-        <div >
+        <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
           <Navbar />
-          <main className='main'>
+          <main className='main' style={{ flex: 1 }}>
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/select-teams" element={<SelectTeams />} />

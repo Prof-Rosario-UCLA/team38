@@ -14,6 +14,7 @@ export const NFLTeams = [
   "HOU",
   "IND",
   "JAX",
+  "KC",
   "LAC",
   "LAR",
   "LV",
