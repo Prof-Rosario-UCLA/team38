@@ -25,6 +25,8 @@ interface Team {
   logos: { href: string }[];
 }
 
+const isLocal = false;
+
 type League = 'NBA' | 'NFL' | 'MLB';
 interface FaviteTeamsPayload {
   UserID: string;
@@ -162,10 +164,7 @@ const SelectTeams = () => {
         MLBFavorites: selectedTeams.MLB
       };
 
-      console.log('Saving favorite teams:', payload);
-      console.log("Stringified payload:", JSON.stringify(payload));
-
-      const response = await fetch('http://localhost:3000/favorite-teams', {
+      const response = await fetch( isLocal ? 'http://localhost:8080/favorite-teams' : 'https://cs144-25s-dhruvpareek12.uw.r.appspot.com/favorite-teams', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

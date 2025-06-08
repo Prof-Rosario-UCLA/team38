@@ -1,0 +1,13 @@
+runtime: nodejs22
+env: standard
+instance_class: F1
+
+automatic_scaling:
+  max_instances: 1
+  min_instances: 1
+
+# your secrets or API keys
+env_variables:
+  AWS_ACCESS_KEY_ID:  "AKIAXGXBKMJOWO2R4QW7"
+  AWS_SECRET_ACCESS_KEY: "LnJpX1UE033elcorxG28QlMzFW7xv2jtNQNzQp7V"
+  AWS_REGION: "us-west-1"

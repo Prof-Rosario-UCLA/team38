@@ -8,13 +8,17 @@ import {
   
   dotenv.config();
   
+  const isLocal = !!process.env.DYNAMO_ENDPOINT;
+
   const ddb = new DynamoDBClient({
-    region: process.env.AWS_REGION,
-    endpoint: process.env.DYNAMO_ENDPOINT,
-    credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-    },
+  region: process.env.AWS_REGION ?? "us-west-1",
+    ...(isLocal && {                     
+      endpoint: process.env.DYNAMO_ENDPOINT,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      },
+    }),
   });
   
   export const ddbDocClient = DynamoDBDocumentClient.from(ddb, {

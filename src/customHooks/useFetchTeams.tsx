@@ -14,13 +14,13 @@ export default function useFetchTeams(league: string) {
                 
                 switch (league) {
                     case 'NBA':
-                        url = 'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams';
+                        url = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams';
                         break;
                     case 'NFL':
-                        url = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/teams';
+                        url = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams';
                         break;
                     case 'MLB':
-                        url = 'http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams';
+                        url = 'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams';
                         break;
                     default:
                         throw new Error('Invalid league selected');
