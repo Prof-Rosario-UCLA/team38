@@ -1,32 +1,56 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TeamCard } from './TeamCard';
 import { TeamDialog } from './TeamDialog';
 import { useDragAndDrop } from '../customHooks/useDragAndDrop';
+import useFetchTeamDetails from '../customHooks/useFetchTeamDetails';
+import useScoreboardData from '../customHooks/useScoreboardData';
+import useFetchFavTeams from '../customHooks/useFetchFavTeams';
 
 interface TeamsSectionProps {
-  teams: any[];
-  teamsLoading: boolean;
-  teamsError: string | null;
-  currentLeague: string;
-  scoreboardEvents: any[];
+  currentSport: 'basketball' | 'football' | 'baseball';
+  currentLeague: 'nba' | 'nfl' | 'mlb';
+  userEmail: string | undefined;
+  selectedTab: number;
 }
 
 export const TeamsSection: React.FC<TeamsSectionProps> = ({
-  teams,
-  teamsLoading,
-  teamsError,
+  currentSport,
   currentLeague,
-  scoreboardEvents
+  userEmail,
+  selectedTab
 }) => {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [open, setOpen] = useState(false);
+  // Fetch favorite teams
+  const { teamsBySport, loading: loadingFavTeams, error: errorFavTeams } = useFetchFavTeams(userEmail);
+  const { NBAFavorites = [], NFLFavorites = [], MLBFavorites = [] } = teamsBySport;
+  const currentFavs = [NBAFavorites, NFLFavorites, MLBFavorites][selectedTab];
+  const [orderedTeams, setOrderedTeams] = useState<any[]>([]);
+  
+  // Fetch data using the hooks that were previously in Dashboard
+  const { data: teams, loading: teamsLoading, error: teamsError } = useFetchTeamDetails(
+    currentSport,
+    currentLeague,
+    currentFavs
+  );
+
+  const { data: scoreboardEvents } = useScoreboardData(
+    currentSport,
+    currentLeague
+  );
   
   const {
     teamOrder,
     onDragStart,
     onDrop,
     onDragOver
-  } = useDragAndDrop(teams);
+  } = useDragAndDrop(teams, currentLeague);
+
+  useEffect(() => {
+    //change the teams array to be in the order of the teamOrder
+    const newTeams = teamOrder.map((id) => teams.find((t: any) => t.team.id === id));
+    setOrderedTeams(newTeams);
+  }, [teamOrder, teams]);
 
   const formatFutureGame = (isoString: string | undefined): string => {
     if (!isoString) return 'N/A';
@@ -95,6 +119,8 @@ export const TeamsSection: React.FC<TeamsSectionProps> = ({
     setSelectedTeam(null);
   };
 
+  if (loadingFavTeams) return <p>Loading favorite teams...</p>;
+  if (errorFavTeams) return <p>Error loading favorites: {errorFavTeams}</p>;
   if (teamsLoading) return <p>Loading {currentLeague.toUpperCase()} teams...</p>;
   if (teamsError) return <p>Error: {teamsError}</p>;
   if (!teams.length) return <p>No favorite teams for {currentLeague.toUpperCase()}, select some on the "Select Teams" page</p>;

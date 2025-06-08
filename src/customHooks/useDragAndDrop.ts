@@ -1,13 +1,47 @@
 import { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export const useDragAndDrop = (teams: any[]) => {
+
+export const useDragAndDrop = (teams: any[], sportType: string) => {
   const [teamOrder, setTeamOrder] = useState<string[]>([]);
+  const { user, isLoading } = useAuth0();
+  const userEmail: string = user?.email || '';
+
+  //make a case switch statement for sportType
+  let sportTypeString = "";
+  switch (sportType) {
+    case "nba":
+      sportTypeString = "NBAFavorites";
+      break;
+    case "nfl":
+      sportTypeString = "NFLFavorites";
+      break;
+    case "mlb":
+      sportTypeString = "MLBFavorites";
+      break;
+  }
 
   useEffect(() => {
-    if (teams.length && teamOrder.length === 0) {
+    const newTeams = teamOrder.map((id) => teams.find((t: any) => t.team.id === id).team.abbreviation);
+    console.log("team order changed in useDragAndDrop");
+    //save the newTeams to the database
+    async function saveTeams() {
+      const _ = await fetch(`http://localhost:3000/favorite-teams/${userEmail}/${sportTypeString}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ favorites: newTeams })
+    });
+    }
+    saveTeams();
+  }, [teamOrder]);
+
+  useEffect(() => {
+    if (teams.length > 0) {
       setTeamOrder(teams.map((t: any) => t.team.id));
     }
-  }, [teams, teamOrder.length]);
+  }, [teams]);
 
   const onDragStart = (e: React.DragEvent, id: string) => {
     e.dataTransfer.setData("text/plain", id);

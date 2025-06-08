@@ -64,8 +64,6 @@ router.post("/", async (req: Request, res: Response) => {
       return;
     }
   }
-  console.log("NBATeams validation array:", NBATeams);
-  console.log("NBAFavorites in request body:", req.body.NBAFavorites);
   if (item.NBAFavorites) {
     const invalidNBATeams = item.NBAFavorites.filter(
       (team) => !NBATeams.includes(team.trim().toUpperCase())
@@ -103,12 +101,15 @@ router.post("/:userId/:sport", (async (req: Request, res: Response) => {
   const { userId, sport } = req.params as { userId: string; sport: SportType };
   const { favorites } = req.body as UpdateSportFavoritesBody;
 
+  console.log("updating favorites for sport", sport);
+  console.log("favorites", favorites);
+
+
   if (!["NFLFavorites", "NBAFavorites", "MLBFavorites"].includes(sport)) {
     return res.status(400).json({ error: "Invalid sport specified" });
   }
 
   if (sport === "NFLFavorites") {
-    console.log("NFL Teams", NFLTeams);
     const invalidNFLTeams = favorites.filter(
       (team) => !NFLTeams.includes(team)
     );
@@ -119,7 +120,6 @@ router.post("/:userId/:sport", (async (req: Request, res: Response) => {
       return;
     }
   } else if (sport === "NBAFavorites") {
-    console.log("NBA Teams", NBATeams);
     const invalidNBATeams = favorites.filter(
       (team) => !NBATeams.includes(team)
     );
@@ -130,7 +130,6 @@ router.post("/:userId/:sport", (async (req: Request, res: Response) => {
       return;
     }
   } else if (sport === "MLBFavorites") {
-    console.log("MLB Teams", MLBTeams);
     const invalidMLBTeams = favorites.filter(
       (team) => !MLBTeams.includes(team)
     );

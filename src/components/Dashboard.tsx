@@ -10,9 +10,6 @@ import {
 } from "@mui/material";
 
 
-import useFetchFavTeams from "../customHooks/useFetchFavTeams";
-import useScoreboardData from "../customHooks/useScoreboardData";
-import useFetchTeamDetails from "../customHooks/useFetchTeamDetails";
 import useFetchNews from "../customHooks/useFetchNews";
 import { useNavbarHeight } from "../customHooks/useNavbarHeight";
 
@@ -36,27 +33,12 @@ const theme = createTheme({
 
 const Dashboard = () => {
   const { user, isLoading: isLoadingAuth0 } = useAuth0();
-  const { teamsBySport, loading: loadingFavTeams, error: errorFavTeams } = useFetchFavTeams(user?.email);
   const [selectedTab, setSelectedTab] = useState(0);
   const [subTabValue, setSubTabValue] = useState(0);
   const { navbarHeight, appBarHeight, subTabHeight } = useNavbarHeight();
 
-  const { NBAFavorites = [], NFLFavorites = [], MLBFavorites = [] } = teamsBySport;
-
   const currentSport = sportMappings.sports[selectedTab];
   const currentLeague = sportMappings.leagues[selectedTab];
-  const currentFavs = [NBAFavorites, NFLFavorites, MLBFavorites][selectedTab];
-
-  const { data: teams, loading: teamsLoading, error: teamsError } = useFetchTeamDetails(
-    currentSport as 'basketball' | 'football' | 'baseball',
-    currentLeague as 'nba' | 'nfl' | 'mlb',
-    currentFavs
-  ); 
-
-  const { data: scoreboardEvents } = useScoreboardData(
-    currentSport as 'basketball' | 'football' | 'baseball',
-    currentLeague as 'nba' | 'nfl' | 'mlb'
-  );
 
   const { news, loading: newsLoading, error: newsError } = useFetchNews(
     currentSport as 'basketball' | 'football' | 'baseball',
@@ -85,14 +67,6 @@ const Dashboard = () => {
         <p>Please login to view your favorite teams</p>
       </Box>
     );
-  }
-
-  if (loadingFavTeams) {
-    return <p>Loading...</p>;
-  }
-
-  if (errorFavTeams) {
-    return <p>Error: {errorFavTeams}</p>;
   }
 
   return (
@@ -151,11 +125,10 @@ const Dashboard = () => {
           <TabPanel value={subTabValue} index={0}>
             <Box sx={{ p: 2 }}>
               <TeamsSection
-                teams={teams}
-                teamsLoading={teamsLoading}
-                teamsError={teamsError}
-                currentLeague={currentLeague}
-                scoreboardEvents={scoreboardEvents}
+                currentSport={currentSport as 'basketball' | 'football' | 'baseball'}
+                currentLeague={currentLeague as 'nba' | 'nfl' | 'mlb'}
+                userEmail={user?.email}
+                selectedTab={selectedTab}
               />
             </Box>
           </TabPanel>
