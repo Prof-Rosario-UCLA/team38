@@ -4,7 +4,7 @@
 MaterialUI being used for styling: https://mui.com/material-ui/getting-started/
 `npm install @mui/material @emotion/react @emotion/styled`
 
-- Whenever you update anything related to API's, must run `tsc` to compile the typescript code into javascript code then run `npm start` to start the server
+- Whenever you update anything related to API's, must run `tsc` to compile the typescript code into javascript code then run `npm start` to start the server in backend/express-api
 
 Deploying to App Engine:
 `gcloud app deploy --version X`  
@@ -15,7 +15,7 @@ To run project Locally:
 -In useFetchFavTeams.tsx, change isLocal to true to run locally
 -In SelectTeams.tsx, change isLocal to true to run locally
 -backend/express-api/.env uncomment the local section and comment the production section
-`npm install` then to run Express API routes and Frontend: `NODE_ENV=production npm start` (or maybe `npm start`) 
+`npm install` then to run Express API routes and Frontend: `npm start` in root directory
 -To run the database, `cd backend/DynamoDB_local_latest` then `java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb`
 
 
