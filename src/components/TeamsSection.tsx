@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TeamCard } from './TeamCard';
 import { TeamDialog } from './TeamDialog';
 import { useDragAndDrop } from '../customHooks/useDragAndDrop';
@@ -25,7 +25,6 @@ export const TeamsSection: React.FC<TeamsSectionProps> = ({
   const { teamsBySport, loading: loadingFavTeams, error: errorFavTeams } = useFetchFavTeams(userEmail);
   const { NBAFavorites = [], NFLFavorites = [], MLBFavorites = [] } = teamsBySport;
   const currentFavs = [NBAFavorites, NFLFavorites, MLBFavorites][selectedTab];
-  const [orderedTeams, setOrderedTeams] = useState<any[]>([]);
   
   // Fetch data using the hooks that were previously in Dashboard
   const { data: teams, loading: teamsLoading, error: teamsError } = useFetchTeamDetails(
@@ -45,12 +44,6 @@ export const TeamsSection: React.FC<TeamsSectionProps> = ({
     onDrop,
     onDragOver
   } = useDragAndDrop(teams, currentLeague);
-
-  useEffect(() => {
-    //change the teams array to be in the order of the teamOrder
-    const newTeams = teamOrder.map((id) => teams.find((t: any) => t.team.id === id));
-    setOrderedTeams(newTeams);
-  }, [teamOrder, teams]);
 
   const formatFutureGame = (isoString: string | undefined): string => {
     if (!isoString) return 'N/A';

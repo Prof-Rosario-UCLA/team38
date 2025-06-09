@@ -5,7 +5,7 @@ const isLocal = false;
 
 export const useDragAndDrop = (teams: any[], sportType: string) => {
   const [teamOrder, setTeamOrder] = useState<string[]>([]);
-  const { user, isLoading } = useAuth0();
+  const { user } = useAuth0();
   const userEmail: string = user?.email || '';
 
   //make a case switch statement for sportType
