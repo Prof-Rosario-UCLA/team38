@@ -11,4 +11,4 @@ steps:
 timeout: '900s'
 
 options:
-  defaultLogsBucketBehavior: DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED
+  defaultLogsBucketBehavior: CLOUD_LOGGING_ONLY
