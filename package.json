@@ -9,7 +9,7 @@
     "dev:dynamodb": "java -Djava.library.path=backend/dynamodb_local_latest/DynamoDBLocal_lib -jar backend/dynamodb_local_latest/DynamoDBLocal.jar -sharedDb",
     "dev:all": "concurrently -k -n FE,API,DB -c green,cyan,magenta \"npm:dev\" \"npm:dev:api\" \"npm:dev:dynamodb\"",
     "start": "node backend/express-api/dist/index.js",
-    "build": "tsc -b && vite build",
+    "build": "cd backend/express-api/ && tsc && cd ../.. && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
