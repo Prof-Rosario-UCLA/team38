@@ -14,7 +14,7 @@ app.use(express.json());
 /* ---------- CORS ----------  */
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:8080", "https://cs144-25s-team38.et.r.appspot.com/"],
+    origin: ["http://localhost:5173", "http://localhost:8080", "https://cs144-25s-team38.et.r.appspot.com"],
   })
 );
 
