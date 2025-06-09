@@ -9,3 +9,6 @@ steps:
     args: ['app', 'deploy', '--quiet']  # gcloud app deploy
 
 timeout: '900s'
+
+options:
+  defaultLogsBucketBehavior: CLOUD_LOGGING_ONLY
