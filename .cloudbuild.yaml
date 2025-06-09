@@ -11,4 +11,4 @@ steps:
 timeout: '900s'
 
 options:
-  defaultLogsBucketBehavior: NONE
+  defaultLogsBucketBehavior: DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED
