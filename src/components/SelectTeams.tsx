@@ -25,7 +25,7 @@ interface Team {
   logos: { href: string }[];
 }
 
-const isLocal = false;
+const isLocal = true;
 
 type League = 'NBA' | 'NFL' | 'MLB';
 interface FaviteTeamsPayload {
