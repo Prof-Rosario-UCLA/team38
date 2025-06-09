@@ -15,7 +15,8 @@ To run project Locally:
 -In useFetchFavTeams.tsx, change isLocal to true to run locally
 -In SelectTeams.tsx, change isLocal to true to run locally
 -backend/express-api/.env uncomment the local section and comment the production section
-`npm install` then to run Express API routes and Frontend: `npm start` in root directory
+`npm install`.
+-`cd backend/express-api/ && tsc && cd ../.. && npm run build && npm start` to compile the typescript code into javascript code then run the frontend and express server
 -To run the database, `cd backend/DynamoDB_local_latest` then `java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb`
 
 
