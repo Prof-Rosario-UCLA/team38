@@ -6,7 +6,9 @@ import path from "path";
 import favoriteTeamsRouter from "./routes/favoriteTeams";
 import cors from "cors";
 
-dotenv.config();
+dotenv.config({
+  path: path.resolve(__dirname, "../.env"),
+});
 
 const app = express();
 app.use(express.json());
@@ -15,10 +17,18 @@ app.use(express.json());
 if (process.env.NODE_ENV !== "production") {
   app.use(
     cors({
-      origin: ["http://localhost:5173", "http://localhost:8080"],
+      origin: ["http://localhost:8080"],
     })
   );
 }
+
+console.log({
+  DYNAMO_ENDPOINT: process.env.DYNAMO_ENDPOINT ?? "Deployed",
+  AWS_REGION:       process.env.AWS_REGION,
+  AWS_ACCESS_KEY_ID:     process.env.AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
 
 /* ---------- API routes ---------- */
 app.use("/favorite-teams", favoriteTeamsRouter);
@@ -35,5 +45,5 @@ app.get(/.*/, (_req, res) => {
 /* ---------- Start server ---------- */
 const PORT = 8080;
 app.listen(PORT, () => {
-  console.log(`⚡️  API + static server listening on http://localhost:${PORT}`);
+  console.log(`⚡️  API + frontend listening on http://localhost:${PORT}`);
 });

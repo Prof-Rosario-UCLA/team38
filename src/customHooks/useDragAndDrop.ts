@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export const useDragAndDrop = (teams: any[], sportType: string) => {
   const [teamOrder, setTeamOrder] = useState<string[]>([]);
-  const { user, isLoading } = useAuth0();
+  const { user } = useAuth0();
   const userEmail: string = user?.email || '';
 
   //make a case switch statement for sportType
@@ -26,7 +26,7 @@ export const useDragAndDrop = (teams: any[], sportType: string) => {
     console.log("team order changed in useDragAndDrop");
     //save the newTeams to the database
     async function saveTeams() {
-      const _ = await fetch(`http://localhost:3000/favorite-teams/${userEmail}/${sportTypeString}`, {
+      await fetch(`http://localhost:8080/favorite-teams/${userEmail}/${sportTypeString}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

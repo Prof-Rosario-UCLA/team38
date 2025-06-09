@@ -45,11 +45,11 @@ const Dashboard = () => {
     currentLeague as 'nba' | 'nfl' | 'mlb'
   );
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
   };
 
-  const handleSubTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleSubTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setSubTabValue(newValue);
   };
 
