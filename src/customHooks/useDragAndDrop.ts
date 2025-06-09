@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
+const isLocal = false;
 
 export const useDragAndDrop = (teams: any[], sportType: string) => {
   const [teamOrder, setTeamOrder] = useState<string[]>([]);
@@ -26,7 +27,7 @@ export const useDragAndDrop = (teams: any[], sportType: string) => {
     console.log("team order changed in useDragAndDrop");
     //save the newTeams to the database
     async function saveTeams() {
-      await fetch(`http://localhost:8080/favorite-teams/${userEmail}/${sportTypeString}`, {
+      await fetch(isLocal ? `http://localhost:8080/favorite-teams/${userEmail}/${sportTypeString}` : `https://cs144-25s-dhruvpareek12.uw.r.appspot.com/favorite-teams/${userEmail}/${sportTypeString}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
