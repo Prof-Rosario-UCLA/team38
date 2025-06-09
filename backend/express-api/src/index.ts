@@ -12,13 +12,11 @@ const app = express();
 app.use(express.json());
 
 /* ---------- CORS ----------  */
-if (process.env.NODE_ENV !== "production") {
-  app.use(
-    cors({
-      origin: ["http://localhost:5173", "http://localhost:8080"],
-    })
-  );
-}
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:8080", "https://cs144-25s-team38.et.r.appspot.com/"],
+  })
+);
 
 /* ---------- API routes ---------- */
 app.use("/favorite-teams", favoriteTeamsRouter);
