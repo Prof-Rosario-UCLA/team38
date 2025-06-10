@@ -242,7 +242,7 @@ const SelectTeams = () => {
           <CircularProgress />
         </Box>
       ) : error ? (
-        <div>Error loading teams</div>
+        <div>Can not load teams. Please check your internet connection and try again.</div>
       ) : (
         <>
         <Grid container spacing={2}  >
