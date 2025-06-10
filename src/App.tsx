@@ -4,9 +4,16 @@ import Dashboard from './components/Dashboard'
 import SelectTeams from './components/SelectTeams'
 import './App.css'
 import { useAuth0 } from "@auth0/auth0-react";
+import { useServiceWorker } from './customHooks/useServiceWorker'
+import { OfflineIndicator } from './components/OfflineIndicator'
+import {InstallPrompt} from './components/InstallPrompt'
+import {UpdatePrompt} from './components/UpdatePrompt'
+
 
 function App() {
   const { isLoading } = useAuth0();
+
+  useServiceWorker();
   if (isLoading) {
     return <div>Loading ...</div>;
   }
@@ -22,6 +29,10 @@ function App() {
               
             </Routes>
           </main>
+          <OfflineIndicator />
+          <InstallPrompt />
+          <UpdatePrompt />
+
         </div>
       </Router>
   )

@@ -27,7 +27,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
   currentLeague
 }) => {
   if (newsLoading) return <p>Loading {currentLeague.toUpperCase()} news...</p>;
-  if (newsError) return <p>No news available</p>;
+  if (newsError) return <p>No news available. Please check your internet connection and try again.</p>;
 
   return (
     <section className="dashboard-section">

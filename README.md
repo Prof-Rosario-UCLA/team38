@@ -43,6 +43,7 @@ When the frontend and express server are running locally, you can either use the
 
 Since there are some difficulties relating to Auth0 and CORS with you guys deploying the project, you guys can use the deployed the project to Google App Engine at this URL and we won't take it down until grading is done: **********
 
+
 ***REST API ENDPOINTS:***
 1. List all users (scan)
 router.get("/", async (req: Request, res: Response) => {

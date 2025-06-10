@@ -115,7 +115,7 @@ export const TeamsSection: React.FC<TeamsSectionProps> = ({
   if (loadingFavTeams) return <p>Loading favorite teams...</p>;
   if (errorFavTeams) return <p>Error loading favorites: {errorFavTeams}</p>;
   if (teamsLoading) return <p>Loading {currentLeague.toUpperCase()} teams...</p>;
-  if (teamsError) return <p>Error: {teamsError}</p>;
+  if (teamsError) return <p>Can not load teams. Please check your internet connection and try again.</p>;
   if (!teams.length) return <p>No favorite teams for {currentLeague.toUpperCase()}, select some on the "Select Teams" page</p>;
 
   return (
@@ -143,7 +143,6 @@ export const TeamsSection: React.FC<TeamsSectionProps> = ({
         open={open}
         onClose={handleClose}
         team={selectedTeam}
-        getGameInfo={getGameInfo}
       />
     </section>
   );

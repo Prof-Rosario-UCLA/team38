@@ -5,9 +5,12 @@ import {
     DynamoDBDocumentClient,
   } from '@aws-sdk/lib-dynamodb';
   import dotenv from 'dotenv';
+import path from 'path';
   
-  dotenv.config();
-  
+  dotenv.config({
+    path: path.resolve(__dirname, "../.env"),
+  });
+    
   const isLocal = !!process.env.DYNAMO_ENDPOINT;
 
   const ddb = new DynamoDBClient({

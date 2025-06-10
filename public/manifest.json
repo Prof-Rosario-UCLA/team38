@@ -1,0 +1,47 @@
+{
+  "name": "Sports Dashboard",
+  "short_name": "SportsDash",
+  "description": "Your personal sports teams dashboard",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/home-mobile.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshots/home-desktop.png",
+      "sizes": "1100x700",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "categories": ["sports", "news", "lifestyle"],
+  "lang": "en-US",
+  "dir": "ltr"
+}

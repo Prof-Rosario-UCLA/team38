@@ -27,6 +27,7 @@ export const useDragAndDrop = (teams: any[], sportType: string) => {
 
     async function saveTeams() {
       await fetch(isLocal ? `http://localhost:8080/favorite-teams/${userEmail}/${sportTypeString}` : `https://cs144-25s-dhruvpareek12.uw.r.appspot.com/favorite-teams/${userEmail}/${sportTypeString}`, {
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -120,17 +120,16 @@ const Dashboard = () => {
             height: `calc(100vh - ${navbarHeight + appBarHeight + subTabHeight}px)`,
             marginTop: `${navbarHeight + appBarHeight + subTabHeight}px`,
             overflowY: "auto",
+            p: 2
           }}
         >
           <TabPanel value={subTabValue} index={0}>
-            <Box sx={{ p: 2 }}>
               <TeamsSection
                 currentSport={currentSport as 'basketball' | 'football' | 'baseball'}
                 currentLeague={currentLeague as 'nba' | 'nfl' | 'mlb'}
                 userEmail={user?.email}
                 selectedTab={selectedTab}
               />
-            </Box>
           </TabPanel>
           <TabPanel value={subTabValue} index={1}>
             <NewsSection
