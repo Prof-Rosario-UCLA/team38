@@ -24,8 +24,7 @@ export const useDragAndDrop = (teams: any[], sportType: string) => {
 
   useEffect(() => {
     const newTeams = teamOrder.map((id) => teams.find((t: any) => t.team.id === id).team.abbreviation);
-    console.log("team order changed in useDragAndDrop");
-    //save the newTeams to the database
+
     async function saveTeams() {
       await fetch(isLocal ? `http://localhost:8080/favorite-teams/${userEmail}/${sportTypeString}` : `https://cs144-25s-dhruvpareek12.uw.r.appspot.com/favorite-teams/${userEmail}/${sportTypeString}`, {
       method: 'POST',
@@ -39,7 +38,7 @@ export const useDragAndDrop = (teams: any[], sportType: string) => {
   }, [teamOrder]);
 
   useEffect(() => {
-    if (teams.length > 0) {
+    if (teams.length > 0 && teamOrder.length === 0) {
       setTeamOrder(teams.map((t: any) => t.team.id));
     }
   }, [teams]);

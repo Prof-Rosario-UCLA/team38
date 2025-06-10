@@ -29,7 +29,6 @@ export default function useFetchTeamDetails(
             )
           )
         );
-        console.log("Fetched team details:", responses);
         setData(responses.map((res) => res.data));
         setError(null);
       } catch (err: any) {
