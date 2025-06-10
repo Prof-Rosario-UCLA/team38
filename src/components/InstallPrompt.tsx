@@ -5,7 +5,7 @@ import {
  Button,
  Box
 } from '@mui/material';
-import { InstallMobile, InstallDesktop } from '@mui/icons-material';
+import { InstallMobile } from '@mui/icons-material';
 
 
 interface BeforeInstallPromptEvent extends Event {

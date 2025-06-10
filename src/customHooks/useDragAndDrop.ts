@@ -8,7 +8,6 @@ export const useDragAndDrop = (teams: any[], sportType: string) => {
   const { user } = useAuth0();
   const userEmail: string = user?.email || '';
 
-  //make a case switch statement for sportType
   let sportTypeString = "";
   switch (sportType) {
     case "nba":
@@ -39,7 +38,7 @@ export const useDragAndDrop = (teams: any[], sportType: string) => {
   }, [teamOrder]);
 
   useEffect(() => {
-    if (teams.length > 0 && teamOrder.length === 0) {
+    if (teams.length > 0) {
       setTeamOrder(teams.map((t: any) => t.team.id));
     }
   }, [teams]);

@@ -7,7 +7,7 @@ interface RawFavorites {
     MLBFavorites?: string[];
   }
 
-  const isLocal = true;
+  const isLocal = false;
   
 export default function useFetchFavTeams(userID: string | undefined) {
     const [teamsBySport, setTeamsBySport] = useState<RawFavorites>({});

@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 
 export interface ServiceWorkerHook {
   isInstalled: boolean;
-  isWaitingToInstall: boolean;
   updateAvailable: boolean;
   installUpdate: () => void;
 }
 
 export const useServiceWorker = (): ServiceWorkerHook => {
   const [isInstalled, setIsInstalled] = useState(false);
-  const [isWaitingToInstall, setIsWaitingToInstall] = useState(false);
   const [updateAvailable, setUpdateAvailable] = useState(false);
   const [waitingWorker, setWaitingWorker] = useState<ServiceWorker | null>(
     null
@@ -55,7 +53,6 @@ export const useServiceWorker = (): ServiceWorkerHook => {
 
   return {
     isInstalled,
-    isWaitingToInstall,
     updateAvailable,
     installUpdate,
   };

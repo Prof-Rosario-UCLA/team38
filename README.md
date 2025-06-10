@@ -18,14 +18,12 @@ The app is hosted at **********
 
 When the frontend and express server are running locally, you can either use the deployed dynamodb table or run the local dynamodb server.
   *Use the local dynamodb server for development.*
-  - cd backend/express-api and open the .env file.
-  - Uncomment the local section and comment the production section.
+  - `cd backend/express-api` and open the .env file. Uncomment the local section and comment the production section.
   - Run `tsc` to compile the typescript code into javascript code.
   - Run `cd ../DynamoDB_local_latest` then `java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb` to start the database on port 8000.
 
   *Use the deployed dynamodb server for production.*
-  - cd backend/express-api and open the .env file.
-  - Uncomment the production section and comment the local section.
+  - cd backend/express-api and open the .env file. Uncomment the production section and comment the local section.
   - Run `tsc` to compile the typescript code into javascript code.
 
 
