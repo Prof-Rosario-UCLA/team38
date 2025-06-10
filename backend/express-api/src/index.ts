@@ -1,4 +1,3 @@
-
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
@@ -14,13 +13,12 @@ const app = express();
 app.use(express.json());
 
 /* ---------- CORS ----------  */
-if (process.env.NODE_ENV !== "production") {
-  app.use(
-    cors({
-      origin: ["http://localhost:8080"],
-    })
-  );
-}
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:8080", "https://cs144-25s-team38.et.r.appspot.com"],
+  })
+);
+
 
 console.log({
   DYNAMO_ENDPOINT: process.env.DYNAMO_ENDPOINT ?? "Deployed",

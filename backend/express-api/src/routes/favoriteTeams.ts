@@ -50,7 +50,7 @@ router.get("/:userId", (async (req: Request, res: Response) => {
   res.json(result.Item);
 }) as RequestHandler);
 
-// 3. Create or overwrite a user's favorites
+// 3. Create or overwrite a user's favorites across all sports
 router.post("/", async (req: Request, res: Response) => {
   const item = req.body as Favorites;
   if (item.NFLFavorites) {
@@ -100,10 +100,6 @@ router.post("/", async (req: Request, res: Response) => {
 router.post("/:userId/:sport", (async (req: Request, res: Response) => {
   const { userId, sport } = req.params as { userId: string; sport: SportType };
   const { favorites } = req.body as UpdateSportFavoritesBody;
-
-  console.log("updating favorites for sport", sport);
-  console.log("favorites", favorites);
-
 
   if (!["NFLFavorites", "NBAFavorites", "MLBFavorites"].includes(sport)) {
     return res.status(400).json({ error: "Invalid sport specified" });
@@ -181,10 +177,8 @@ router.post("/:userId/:sport", (async (req: Request, res: Response) => {
   }
 }) as RequestHandler);
 
-// 4. Delete a user completely
-router.delete(
-  "/:userId",
-  async (req: Request<{ userId: string }>, res: Response) => {
+// 5. Delete a user completely
+router.delete( "/:userId", async (req: Request<{ userId: string }>, res: Response) => {
     await ddbDocClient.send(
       new DeleteCommand({
         TableName: TABLE,

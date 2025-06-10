@@ -16,7 +16,6 @@ export default function useFetchFavTeams(userID: string | undefined) {
 
     useEffect(() => {
         if (!userID) return;
-        console.log(`userID in fetchFavTeams: ${userID}`);
         const fetchTeams = async () => {
             try {
                 setLoading(true);
