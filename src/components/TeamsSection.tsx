@@ -143,7 +143,6 @@ export const TeamsSection: React.FC<TeamsSectionProps> = ({
         open={open}
         onClose={handleClose}
         team={selectedTeam}
-        getGameInfo={getGameInfo}
       />
     </section>
   );

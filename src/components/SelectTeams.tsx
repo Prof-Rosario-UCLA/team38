@@ -95,19 +95,22 @@ const SelectTeams = () => {
 
   const { width, height} = useWindowDimensions();
   const getGridColumns = () => {
-    if (width < 500) return 1;
+    if (width < 350) return 0.75;
+    if (width < 550) return 1;
     if (width < 700) return 2;
-    if (width < 1000) return 3;
-    if (width < 1300) return 4;
-    return 5;
+    if (width < 900) return 3;
+    if (width < 1100) return 4;
+    if (width < 1300) return 5;
+    return 6;
   };
   const getGridRows = () => {
-    if (height < 550) return 1;
-    if (height < 650) return 2;
-    if (height < 750) return 3;
-    if (height < 850) return 4;
-    if (height < 950) return 5;
-    if (height < 1050) return 6;
+    if (height < 450) return 1;
+    if (height < 550) return 2;
+    if (height < 630) return 3;
+    if (height < 700) return 4;
+    if (height < 800) return 5;
+    if (height < 950) return 6;
+
     return 7;
   }
   const gridColumns = getGridColumns();

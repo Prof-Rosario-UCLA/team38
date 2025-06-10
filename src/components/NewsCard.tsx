@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Card,
   CardContent,
   CardMedia,
   Typography,
@@ -8,6 +7,8 @@ import {
   Link,
   Chip
 } from '@mui/material';
+
+import useWindowDimensions from '../customHooks/useWindowDimensions';
 
 interface NewsArticle {
   id?: string;
@@ -26,18 +27,21 @@ interface NewsCardProps {
 }
 
 export const NewsCard: React.FC<NewsCardProps> = ({ article, index }) => {
+  const { width } = useWindowDimensions();
+  const isSmallScreen = width < 680;
+
   return (
-    <Card key={article.id || index} sx={{ display: 'flex', mb: 2 }}>
+    <article key={article.id || index} style={{ display: 'flex', flexDirection: isSmallScreen ? 'column' : 'row' }}>
       {article.images && article.images.length > 0 && (
         <CardMedia
           component="img"
-          sx={{ width: 180, height: 100, objectFit: 'fill' }}
+          sx={{ width: 360, height: 200, objectFit: 'fill' }}
           image={article.images[0].url}
           alt={article.images[0].caption || 'News image'}
         />
       )}
       <CardContent sx={{ flex: 1 }}>
-        <Typography variant="h6" component="h2" gutterBottom>
+        <Typography variant="h6">
           <Link
             href={article.links.web.href}
             target="_blank"
@@ -53,17 +57,17 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article, index }) => {
         </Typography>
         
         <Box display="flex" gap={2} mb={1}>
-          <Typography variant="caption" color="text.secondary">
+          <Typography variant="caption" >
             {new Date(article.published).toLocaleDateString()}
           </Typography>
           {article.byline && (
-            <Typography variant="caption" color="text.secondary">
+            <Typography variant="caption" >
               By {article.byline}
             </Typography>
           )}
         </Box>
 
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+        <Typography variant="body2">
           {article.description}
         </Typography>
 
@@ -75,11 +79,12 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article, index }) => {
                 label={category.description}
                 size="small"
                 variant="outlined"
+                color='primary'
               />
             ))}
           </Box>
         )}
       </CardContent>
-    </Card>
+    </article>
   );
 };
