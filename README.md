@@ -5,7 +5,7 @@ The app is built using React, TypeScript, and Vite.
 The backend is built using ExpressJS and NodeJS.
 The database is built using DynamoDB.
 The app is deployed to Google App Engine.
-The app is hosted at **********
+The app is hosted at https://cs144-25s-dhruvpareek12.uw.r.appspot.com/
 
 ***To run the project locally:***
 - One thing to note is that the Auth0 project I created requires me to set valid callback urls in the Auth0 dashboard.
@@ -39,7 +39,7 @@ When the frontend and express server are running locally, you can either use the
 - To look at logs:
 `gcloud app logs tail -s default`
 
-Since there are some difficulties relating to Auth0 and CORS with you guys deploying the project, you guys can use the deployed the project to Google App Engine at this URL and we won't take it down until grading is done: **********
+Since there are some difficulties relating to Auth0 and CORS with you guys deploying the project, you guys can use the deployed the project to Google App Engine at this URL and we won't take it down until grading is done: https://cs144-25s-dhruvpareek12.uw.r.appspot.com/
 
 
 ***REST API ENDPOINTS:***
