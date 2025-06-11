@@ -6,7 +6,7 @@ The goal of this project is to create a simple, user friendly, and lightweight a
 The app is built using React, TypeScript, and Vite.
 The backend is built using ExpressJS and NodeJS.
 The database is built using DynamoDB.
-The app is deployed to Google App Engine.
+The app is deployed to Google App Engine. <br>
 The app is hosted at https://cs144-25s-dhruvpareek12.uw.r.appspot.com/
 
 ## To run the project locally:
@@ -46,6 +46,8 @@ Since there are some difficulties relating to Auth0 and CORS with you guys deplo
 
 
 ## REST API ENDPOINTS:
+- For all of these, if you are using the deployed express server, you will need to replace localhost:8080 with the deployed URL like https://cs144-25s-dhruvpareek12.uw.r.appspot.com/.
+
 1. List all users (scan)
 router.get("/", async (req: Request, res: Response) => {
 http://localhost:8080/favorite-teams/
@@ -61,7 +63,7 @@ http://localhost:8080/favorite-teams/user123
 3. Create or overwrite a user's favorites across all sports
 http://localhost:8080/favorite-teams/
 router.post("/", async (req: Request, res: Response) => {
-- CURL COMMAND: ``curl -X POST http://localhost:3000/favorite-teams -H "Content-Type: application/json" -d '{ "UserID": "dhruvpareek883@gmail.com", "NFLFavorites": ["ARI", "NE"], "NBAFavorites": ["LAL", "BOS"], "MLBFavorites": ["NYM", "LAD"] }'`
+- CURL COMMAND: ``curl -X POST http://localhost:8080/favorite-teams -H "Content-Type: application/json" -d '{ "UserID": "dhruvpareek883@gmail.com", "NFLFavorites": ["ARI", "NE"], "NBAFavorites": ["LAL", "BOS"], "MLBFavorites": ["NYM", "LAD"] }'`
 - Creates or overwrites the user's favorite teams across all sports.
 
 4. Create or overwrite a user's favorites for a specific sport
